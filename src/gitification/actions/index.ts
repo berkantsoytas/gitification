@@ -77,7 +77,6 @@ export function resetThreadsState() {
   Gitification.state.checkedThreadIds.clear()
   Gitification.state.threads = []
   Gitification.state.threadLoadStatus = 'idle'
-  Gitification.state.lastModified = null
 }
 
 export function logout(id: StorageUser['user']['id']) {
@@ -148,7 +147,6 @@ export async function fetchThreads(withLoader = false) {
 
   if (withLoader) {
     clearThreadSelection()
-    Gitification.state.lastModified = null
   }
 
   Gitification.state.threadLoadStatus = withLoader ? 'loading' : 'syncing'
@@ -158,7 +156,6 @@ export async function fetchThreads(withLoader = false) {
       all: Gitification.state.settings.showReadNotifications,
       accessToken: Gitification.state.currentUser.accessToken,
       onlyParticipating: Gitification.state.settings.onlyParticipating,
-      ifModifiedSince: Gitification.state.lastModified ?? undefined,
     })
     .catch((error) => error as HTTPError)
 
@@ -169,21 +166,10 @@ export async function fetchThreads(withLoader = false) {
     }
 
     Gitification.state.threadLoadStatus = 'failed'
-    Gitification.state.lastModified = null
     return
   }
 
-  const [threads, response] = result
-
-  if (response.headers.has('last-modified')) {
-    if (Gitification.state.lastModified) {
-      // This means that there are changes so we should fetch without
-      // "If-Modified-Since" header to get the full data and update the state accordingly
-      Gitification.state.lastModified = null
-      return fetchThreads(withLoader)
-    }
-    Gitification.state.lastModified = response.headers.get('last-modified')
-  }
+  const [threads] = result
 
   const newThreads = Gitification.utils.array.filterNewItems(
     Gitification.state.threads,

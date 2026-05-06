@@ -1,3 +1,6 @@
+### 2.0.8
+  - Removed `lastModified` state and related code, now Gitification always fetches all notifications on refresh or app start. (This is because Github API's `last-modified` header is unreliable and causes stale content, which is worse than increased network usage.)
+
 ### 2.0.7
   - Removed debug value.
 

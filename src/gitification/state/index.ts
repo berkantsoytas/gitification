@@ -65,10 +65,7 @@ export function createState() {
     },
   })
 
-  const lastModified = ref<Option<string>>(null)
-
   const state = {
-    lastModified,
     threads,
     threadLoadStatus,
     checkedThreadIds,
