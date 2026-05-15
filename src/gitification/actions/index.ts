@@ -159,12 +159,7 @@ export async function fetchThreads(withLoader = false) {
     })
     .catch((error) => error as HTTPError)
 
-  if (isKyError(result)) {
-    if (result.response.status === 304) {
-      Gitification.state.threadLoadStatus = 'idle'
-      return
-    }
-
+  if (result instanceof Error) {
     Gitification.state.threadLoadStatus = 'failed'
     return
   }
