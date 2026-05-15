@@ -5,7 +5,6 @@ import { isPermissionGranted, requestPermission, sendNotification } from '@tauri
 import { exit, relaunch } from '@tauri-apps/api/process'
 import { open } from '@tauri-apps/api/shell'
 import { installUpdate } from '@tauri-apps/api/updater'
-import { isKyError } from 'ky'
 import * as AutoStart from 'tauri-plugin-autostart-api'
 import * as Gitification from '../index'
 
