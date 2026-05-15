@@ -8,7 +8,6 @@
   ],
   "scripts": {
     "dev": "run-p vite:dev",
-    "devtools": "vue-devtools",
     "vite:dev": "vite",
     "build": "pnpm run typecheck && vite build",
     "typecheck": "vue-tsc --noEmit",
@@ -42,7 +41,6 @@
     "@types/node": "^25.5.2",
     "@vitejs/plugin-vue": "^6.0.5",
     "@vitejs/plugin-vue-jsx": "^5.1.5",
-    "@vue/devtools": "^8.1.1",
     "async-mutex": "^0.5.0",
     "eslint": "^10.1.0",
     "eslint-plugin-unicorn": "^64.0.0",
