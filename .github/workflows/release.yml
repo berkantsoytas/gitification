@@ -33,7 +33,7 @@ jobs:
       - name: install pnpm
         run: npm install -g pnpm
       - name: install frontend dependencies
-        run: pnpm install
+        run: pnpm install --ignore-scripts
 
       - uses: tauri-apps/tauri-action@v0
         env:
