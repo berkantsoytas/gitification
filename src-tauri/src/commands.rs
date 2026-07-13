@@ -37,7 +37,7 @@ pub fn set_icon_template(is_template: bool, app: AppHandle) {
     // So we just simulate like it has.
 
     let tray = app.tray_by_id("main").expect("tray 'main' not found");
-    let icon = if is_template {
+    let icon: &[u8] = if is_template {
         include_bytes!("../icons/128x128.png")
     } else {
         include_bytes!("../icons/tray/icon.png")
