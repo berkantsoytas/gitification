@@ -48,7 +48,7 @@
     "createUpdaterArtifacts": true
   },
   "productName": "Gitification",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "identifier": "app.gitification",
   "plugins": {
     "deep-link": {

@@ -1,3 +1,6 @@
+### 2.1.1
+  - Fixed tray icon template on mac.
+  - 
 ### 2.1.0
   - Upgraded to Tauri v2
   - OAuth now uses deep linking via `gitification://` instead of local server.
