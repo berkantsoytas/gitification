@@ -3,7 +3,7 @@ import type { Update } from '@tauri-apps/plugin-updater'
 
 import type { Option } from '../../types'
 import { useMediaQuery } from '@vueuse/core'
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, shallowRef } from 'vue'
 import * as Gitification from '../index'
 
 export type GitificationState = ReturnType<typeof createState>
@@ -21,7 +21,8 @@ export function createState() {
   const checkedThreadIds = reactive(new Set<string>())
   const checkedThreads = computed(() => threads.value
     .filter((thread) => checkedThreadIds.has(thread.id)))
-  const newRelease = ref(null as Option<Update>)
+  // Tauri's Update instance uses private fields and must not be proxied by Vue.
+  const newRelease = shallowRef(null as Option<Update>)
 
   const osType = ref('Darwin' as OsType)
 
