@@ -25,8 +25,8 @@ pub fn play_notification_sound(app: AppHandle) {
 #[tauri::command]
 pub fn set_icon_template(is_template: bool, app: AppHandle) {
     let tray = app.tray_by_id("main").expect("tray 'main' not found");
-    tray.set_icon_as_template(is_template).unwrap();
-    tray.set_icon(Some(Image::from_bytes(include_bytes!("../icons/tray/icon.png")).unwrap()))
+    let icon = Image::from_bytes(include_bytes!("../icons/tray/icon.png")).unwrap();
+    tray.set_icon_with_as_template(Some(icon), is_template)
         .unwrap();
 }
 

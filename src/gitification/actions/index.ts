@@ -189,8 +189,8 @@ export async function fetchThreads(withLoader = false) {
   Gitification.state.threadLoadStatus = 'idle'
 }
 
-export function setMenubarIcon(isTemplate: boolean) {
-  invoke('set_icon_template', { isTemplate })
+export async function setMenubarIcon(isTemplate: boolean) {
+  await invoke('set_icon_template', { isTemplate })
 }
 
 let installing = false
