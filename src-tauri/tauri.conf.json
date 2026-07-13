@@ -45,7 +45,7 @@
       "digestAlgorithm": "sha256",
       "timestampUrl": ""
     },
-    "createUpdaterArtifacts": "v1Compatible"
+    "createUpdaterArtifacts": true
   },
   "productName": "Gitification",
   "version": "2.1.0",
