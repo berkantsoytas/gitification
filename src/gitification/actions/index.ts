@@ -1,11 +1,12 @@
 import type { HTTPError } from 'ky'
 import type { StorageUser } from '../storage/types'
-import { invoke } from '@tauri-apps/api'
-import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/api/notification'
-import { exit, relaunch } from '@tauri-apps/api/process'
-import { open } from '@tauri-apps/api/shell'
-import { installUpdate } from '@tauri-apps/api/updater'
-import * as AutoStart from 'tauri-plugin-autostart-api'
+import { invoke } from '@tauri-apps/api/core'
+import { getCurrentWindow } from '@tauri-apps/api/window'
+import * as AutoStart from '@tauri-apps/plugin-autostart'
+
+import { isPermissionGranted, requestPermission, sendNotification } from '@tauri-apps/plugin-notification'
+import { exit, relaunch } from '@tauri-apps/plugin-process'
+import { open } from '@tauri-apps/plugin-shell'
 import * as Gitification from '../index'
 
 export function requestNotificationPermission() {
@@ -14,6 +15,12 @@ export function requestNotificationPermission() {
 
 export function openURL(url: string) {
   open(url)
+}
+
+export async function showWindow() {
+  const window = getCurrentWindow()
+  await window.show()
+  await window.setFocus()
 }
 
 export async function markThreadAsRead(thread: Gitification.api.Types.Thread) {
@@ -195,7 +202,7 @@ export async function updateApp() {
   installing = true
 
   try {
-    await installUpdate()
+    await Gitification.state.newRelease.downloadAndInstall()
     await relaunch()
   }
   catch {

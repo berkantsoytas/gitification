@@ -1,0 +1,22 @@
+{
+  "identifier": "migrated",
+  "description": "Permissions migrated from Tauri 1",
+  "local": true,
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "shell:allow-open",
+    "dialog:allow-confirm",
+    "store:default",
+    {
+      "identifier": "http:default",
+      "allow": [
+        { "url": "https://github.com/*" },
+        { "url": "https://api.github.com/*" }
+      ]
+    },
+    "notification:default",
+    "process:allow-restart",
+    "process:allow-exit"
+  ]
+}
